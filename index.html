@@ -26,7 +26,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
     <!-- Meta Pixel Code -->
+    <!-- Link do Hunting (utm_source contém "hunting"): o Pixel não carrega nesta
+         visita. Sem window.fbq, os eventos do formulário (etapas, Lead, Contact)
+         também não disparam, e o gateway de eventos do Pixel (run.app) não é
+         chamado. Lê só a URL atual; nada é guardado no navegador. -->
     <script>
+      var kvHunting = false;
+      try { kvHunting = /hunting/i.test(new URLSearchParams(window.location.search).get('utm_source') || ''); } catch (e) {}
+      if (!kvHunting) {
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -37,6 +44,7 @@
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '760887529692872');
       fbq('track', 'PageView');
+      }
     </script>
     <!-- End Meta Pixel Code -->
     <script type="module" crossorigin src="./assets/index-kv20261020a.js"></script>
